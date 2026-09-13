@@ -102,7 +102,7 @@
   .program.is-live .program-title{ color:var(--live); }
   .live-dot{ width:6px;height:6px;border-radius:50%; background:var(--live); display:inline-block; margin-right:5px; animation:pulse 1.6s ease-in-out infinite; flex:none; }
 
-  .now-col{ grid-column:2; grid-row:1/-1; position:relative; pointer-events:none; z-index:2; }
+  .now-col{ position:absolute; top:0; bottom:0; left:208px; width:1440px; pointer-events:none; z-index:2; }
   .now-line{ position:absolute; top:0; bottom:0; width:2px; background:var(--live); }
   .now-line::before{ content:""; position:absolute; top:-1px; left:50%; transform:translateX(-50%); width:8px;height:8px;border-radius:50%; background:var(--live); }
 
