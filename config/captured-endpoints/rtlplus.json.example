@@ -1,0 +1,11 @@
+{
+  "_hinweis": "Umbenennen in rtlplus.json, sobald du echte Endpunkte gefunden hast (siehe README, Abschnitt 'Eigener Login'). jsonPath ist der punktgetrennte Pfad zum Array der Sendungen innerhalb der JSON-Antwort. Die IDs unten muessen zu den ids in config/channels.json passen.",
+  "rtlup": { "url": "https://BEISPIEL.rtl.de/epg/rtlup", "method": "GET", "jsonPath": "data.schedule" },
+  "voxup": { "url": "https://BEISPIEL.rtl.de/epg/voxup", "method": "GET", "jsonPath": "data.schedule" },
+  "now": { "url": "https://BEISPIEL.rtl.de/epg/now", "method": "GET", "jsonPath": "data.schedule" },
+  "toggoplus": { "url": "https://BEISPIEL.rtl.de/epg/toggo-plus", "method": "GET", "jsonPath": "data.schedule" },
+  "rtlcrime": { "url": "https://BEISPIEL.rtl.de/epg/rtl-crime", "method": "GET", "jsonPath": "data.schedule" },
+  "rtlpassion": { "url": "https://BEISPIEL.rtl.de/epg/rtl-passion", "method": "GET", "jsonPath": "data.schedule" },
+  "rtlliving": { "url": "https://BEISPIEL.rtl.de/epg/rtl-living", "method": "GET", "jsonPath": "data.schedule" },
+  "geotv": { "url": "https://BEISPIEL.rtl.de/epg/geo", "method": "GET", "jsonPath": "data.schedule" }
+}

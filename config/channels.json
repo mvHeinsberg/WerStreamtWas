@@ -1,0 +1,212 @@
+[
+  {
+    "id": "funk",
+    "name": "funk",
+    "group": "oerr",
+    "url": "https://www.funk.net/",
+    "provider": "funk",
+    "manualFile": "funk.json",
+    "sourceStatus": "inoffiziell",
+    "sourceNote": "Reverse-engineered API (siehe providers/funk.js). Kein Login noetig, aber nicht offiziell dokumentiert."
+  },
+  {
+    "id": "ardkultur",
+    "name": "ARD Kultur",
+    "group": "oerr",
+    "url": "https://www.ardmediathek.de/ard-kultur",
+    "provider": "ardmediathek",
+    "manualFile": "ardkultur.json",
+    "sourceStatus": "inoffiziell",
+    "sourceNote": "Internes api.ardmediathek.de Page-Gateway, von Community-Tools genutzt, nicht offiziell fuer Dritte freigegeben."
+  },
+  {
+    "id": "sportschauextra",
+    "name": "Sportschau Extra",
+    "group": "oerr",
+    "url": "https://www.sportschau.de/livestreams",
+    "provider": "manual",
+    "manualFile": "sportschau-extra.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Kein strukturierter Feed gefunden - manuell pflegen oder HTML-Scraping selbst ergaenzen."
+  },
+  {
+    "id": "zdfsport",
+    "name": "ZDF Sportstudio Extra",
+    "group": "oerr",
+    "url": "https://www.zdf.de/sport",
+    "provider": "zdf",
+    "manualFile": "zdfsport.json",
+    "sourceStatus": "inoffiziell",
+    "sourceNote": "Offizielles Developer Portal (developer.zdf.de) vorhanden - lohnt eigene Registrierung. Hier nur Best-Effort ueber oeffentlich sichtbare Endpunkte."
+  },
+  {
+    "id": "ardklassik",
+    "name": "ARD Klassik",
+    "group": "oerr",
+    "url": "https://www.youtube.com/@ARDKlassik/streams",
+    "provider": "manual",
+    "manualFile": "ard-klassik.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Kein Livestream-EPG, sondern ein YouTube-Kanal der ARD-Klassikredaktionen mit Konzert-Livestreams zu festen Terminen (kein 24/7-Programm). Am 13.09.2026 geprueft. Klick fuehrt direkt zur YouTube-Uebersicht mit allen anstehenden und vergangenen Streams."
+  },
+  {
+    "id": "rtlup",
+    "name": "RTLup",
+    "group": "privat",
+    "url": "https://plus.rtl.de/rtlup/live",
+    "provider": "rtlplus",
+    "manualFile": "rtlup.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Slug am 13.09.2026 live per Klick verifiziert. Optional per eigenem Login abrufbar (siehe README) - sonst manueller Fallback."
+  },
+  {
+    "id": "voxup",
+    "name": "VOXup",
+    "group": "privat",
+    "url": "https://plus.rtl.de/voxup/live",
+    "provider": "rtlplus",
+    "manualFile": "voxup.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Slug am 13.09.2026 live per Klick verifiziert. Optional per eigenem Login abrufbar (siehe README) - sonst manueller Fallback."
+  },
+  {
+    "id": "now",
+    "name": "NOW!",
+    "group": "privat",
+    "url": "https://plus.rtl.de/now/live",
+    "provider": "rtlplus",
+    "manualFile": "now.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Sender startet laut eigener Programmseite taeglich erst um 20:15 Uhr - tagsueber kaum/keine Programmdaten. Slug am 13.09.2026 verifiziert."
+  },
+  {
+    "id": "toggoplus",
+    "name": "TOGGO plus",
+    "group": "privat",
+    "url": "https://plus.rtl.de/toggo-plus/live",
+    "provider": "rtlplus",
+    "manualFile": "toggo-plus.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Slug am 13.09.2026 live per Klick verifiziert."
+  },
+  {
+    "id": "rtlcrime",
+    "name": "RTL Crime",
+    "group": "privat",
+    "url": "https://plus.rtl.de/rtl-crime/live",
+    "provider": "rtlplus",
+    "manualFile": "rtl-crime.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Slug am 13.09.2026 live per Klick verifiziert. Optional per eigenem Login abrufbar (siehe README) - sonst manueller Fallback."
+  },
+  {
+    "id": "rtlpassion",
+    "name": "RTL Passion",
+    "group": "privat",
+    "url": "https://plus.rtl.de/rtl-passion/live",
+    "provider": "rtlplus",
+    "manualFile": "rtl-passion.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Slug am 13.09.2026 live per Klick verifiziert. Optional per eigenem Login abrufbar (siehe README) - sonst manueller Fallback."
+  },
+  {
+    "id": "rtlliving",
+    "name": "RTL Living",
+    "group": "privat",
+    "url": "https://plus.rtl.de/rtl-living/live",
+    "provider": "rtlplus",
+    "manualFile": "rtl-living.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). Slug am 13.09.2026 live per Klick verifiziert. Optional per eigenem Login abrufbar (siehe README) - sonst manueller Fallback."
+  },
+  {
+    "id": "geotv",
+    "name": "GEO Television",
+    "group": "privat",
+    "url": "https://plus.rtl.de/geo/live",
+    "provider": "rtlplus",
+    "manualFile": "geo-television.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (RTL+). WICHTIG: Slug ist '/geo/live', NICHT '/geo-television/live' (letzteres leitet auf die RTL+ Startseite um). Am 13.09.2026 live per Klick verifiziert (Now-Playing 'Unbekanntes Kalifornien' stimmte mit dem Sendeplan ueberein). Optional per eigenem Login abrufbar (siehe README) - sonst manueller Fallback."
+  },
+  {
+    "id": "spiegeltv",
+    "name": "Spiegel TV",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv",
+    "provider": "joyn",
+    "manualFile": "spiegel-tv.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. URL zeigt auf den TV-Programm-Guide - der genaue Deep-Link (?channel_id=...) wurde am 13.09.2026 noch nicht einzeln bestaetigt, Name/Inhalt/Sendeplan aber schon."
+  },
+  {
+    "id": "spiegeltvkonflikte",
+    "name": "Spiegel TV Konflikte",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv",
+    "provider": "joyn",
+    "manualFile": "spiegel-tv-konflikte.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link noch nicht einzeln bestaetigt (siehe Hinweis bei Spiegel TV)."
+  },
+  {
+    "id": "spiegeltvactioncrime",
+    "name": "Spiegel TV action+crime",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv",
+    "provider": "joyn",
+    "manualFile": "spiegel-tv-action-crime.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link noch nicht einzeln bestaetigt (siehe Hinweis bei Spiegel TV)."
+  },
+  {
+    "id": "curiositynow",
+    "name": "Curiosity Now",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv?channel_id=1272",
+    "provider": "joyn",
+    "manualFile": "curiosity-now.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link am 13.09.2026 per Klick bestaetigt (channel_id=1272)."
+  },
+  {
+    "id": "terramaterwild",
+    "name": "Terra Mater WILD",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv",
+    "provider": "joyn",
+    "manualFile": "terra-mater-wild.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link noch nicht einzeln bestaetigt (siehe Hinweis bei Spiegel TV)."
+  },
+  {
+    "id": "ancientaliens",
+    "name": "Ancient Aliens",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv?channel_id=99087",
+    "provider": "joyn",
+    "manualFile": "ancient-aliens.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link am 13.09.2026 per Klick bestaetigt (channel_id=99087)."
+  },
+  {
+    "id": "expeditionunknown",
+    "name": "Expedition Unknown",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv",
+    "provider": "joyn",
+    "manualFile": "expedition-unknown.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link noch nicht einzeln bestaetigt (siehe Hinweis bei Spiegel TV)."
+  },
+  {
+    "id": "xlgeschichte",
+    "name": "XL Geschichte",
+    "group": "privat",
+    "url": "https://www.joyn.de/play/live-tv",
+    "provider": "joyn",
+    "manualFile": "xl-geschichte.json",
+    "sourceStatus": "gesperrt",
+    "sourceNote": "Keine oeffentliche API (Joyn). Reiner Stream-Sender (FAST-Kanal), nicht linear empfangbar. Deep-Link noch nicht einzeln bestaetigt (siehe Hinweis bei Spiegel TV)."
+  }
+]

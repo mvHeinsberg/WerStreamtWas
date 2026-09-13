@@ -1,0 +1,6 @@
+{
+  "_hinweis": "Umbenennen in joyn.json, sobald du echte Endpunkte gefunden hast (siehe README, Abschnitt 'Eigener Login'). jsonPath ist der punktgetrennte Pfad zum Array der Sendungen innerhalb der JSON-Antwort. Die IDs unten muessen zu den ids in config/channels.json passen.",
+  "spiegeltv": { "url": "https://BEISPIEL.joyn.de/epg/spiegel-tv", "method": "GET", "jsonPath": "data.schedule" },
+  "curiositynow": { "url": "https://BEISPIEL.joyn.de/epg/curiosity-now", "method": "GET", "jsonPath": "data.schedule" },
+  "ancientaliens": { "url": "https://BEISPIEL.joyn.de/epg/ancient-aliens", "method": "GET", "jsonPath": "data.schedule" }
+}
