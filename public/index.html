@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Streamguide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+  :root{
+    --bg:#F5F6F8; --surface:#FFFFFF; --surface-2:#FAFBFC;
+    --border:#E2E5EA; --border-strong:#CBD1DA;
+    --text:#1A2130; --text-secondary:#667085; --text-tertiary:#98A2B3;
+    --accent:#2F6FED; --accent-soft:#EAF1FE;
+    --live:#E5484D; --live-soft:#FDECEC;
+    --oerr:#0E8A82; --oerr-soft:#E4F5F3;
+    --privat:#7C5CFF; --privat-soft:#F1EDFF;
+    --ok:#2AA876; --warn:#D8A400;
+    --shadow: 0 1px 2px rgba(20,24,32,.04), 0 8px 24px -12px rgba(20,24,32,.10);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#12151C; --surface:#191D26; --surface-2:#1F232D;
+      --border:#2B303C; --border-strong:#3A4051;
+      --text:#E8EAEF; --text-secondary:#9AA3B4; --text-tertiary:#6B7385;
+      --accent:#6C9BFF; --accent-soft:rgba(108,155,255,.14);
+      --live:#FF6E73; --live-soft:rgba(255,110,115,.14);
+      --oerr:#33C2B4; --oerr-soft:rgba(51,194,180,.13);
+      --privat:#B096FF; --privat-soft:rgba(176,150,255,.13);
+      --ok:#3FCB98; --warn:#E8BB3E;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#12151C; --surface:#191D26; --surface-2:#1F232D;
+    --border:#2B303C; --border-strong:#3A4051;
+    --text:#E8EAEF; --text-secondary:#9AA3B4; --text-tertiary:#6B7385;
+    --accent:#6C9BFF; --accent-soft:rgba(108,155,255,.14);
+    --live:#FF6E73; --live-soft:rgba(255,110,115,.14);
+    --oerr:#33C2B4; --oerr-soft:rgba(51,194,180,.13);
+    --privat:#B096FF; --privat-soft:rgba(176,150,255,.13);
+    --ok:#3FCB98; --warn:#E8BB3E;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{ background:var(--bg); color:var(--text); font-family:'IBM Plex Sans', system-ui, sans-serif; -webkit-font-smoothing:antialiased; margin:0; }
+  body{ padding: 20px 16px 40px; }
+  .app{ max-width:1240px; margin:0 auto; display:flex; flex-direction:column; gap:16px; }
+
+  h1{ font-family:'Archivo', system-ui, sans-serif; font-weight:800; font-size:22px; letter-spacing:-0.01em; margin:0; text-wrap:balance; }
+  .tagline{ margin:2px 0 0; font-size:13px; color:var(--text-secondary); }
+
+  .topbar{ display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+  .brand{ display:flex; align-items:center; gap:12px; }
+  .brand-mark{ width:38px;height:38px; border-radius:10px; background:linear-gradient(155deg, var(--accent), #1B4FC4); display:flex; align-items:center; justify-content:center; color:#fff; font-family:'Archivo',sans-serif; font-weight:800; font-size:15px; flex:none; }
+
+  .controls{ display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .filters{ display:flex; gap:6px; background:var(--surface-2); border:1px solid var(--border); padding:4px; border-radius:10px; }
+  .filter-btn{ font-family:'IBM Plex Sans', sans-serif; font-size:13px; font-weight:600; color:var(--text-secondary); background:transparent; border:none; padding:7px 14px; border-radius:7px; cursor:pointer; transition:background .15s ease, color .15s ease; }
+  .filter-btn:hover{ color:var(--text); }
+  .filter-btn.active{ background:var(--surface); color:var(--accent); box-shadow:var(--shadow); }
+
+  .meta{ display:flex; align-items:center; gap:7px; font-size:12px; color:var(--text-tertiary); font-family:'IBM Plex Mono', monospace; white-space:nowrap; }
+  .update-dot{ width:7px;height:7px;border-radius:50%; background:var(--oerr); flex:none; animation:pulse 2.4s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
+
+  .notice{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:12.5px; color:var(--text-secondary); background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:10px 14px; }
+  .badge{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; font-weight:600; letter-spacing:.03em; color:var(--text-tertiary); background:var(--surface-2); border:1px solid var(--border); padding:2px 7px; border-radius:6px; text-transform:uppercase; }
+  .legend{ display:flex; align-items:center; gap:14px; font-size:11.5px; color:var(--text-tertiary); flex-wrap:wrap; }
+  .legend-item{ display:flex; align-items:center; gap:5px; }
+
+  .guide-shell{ background:var(--surface); border:1px solid var(--border); border-radius:14px; box-shadow:var(--shadow); overflow:hidden; }
+  .guide-scroll{ overflow:auto; max-height:74vh; }
+  .guide-grid{ display:grid; grid-template-columns: 208px 1440px; position:relative; }
+
+  .corner{ position:sticky; top:0; left:0; z-index:5; background:var(--surface); border-bottom:1px solid var(--border); border-right:1px solid var(--border); display:flex; align-items:center; padding:0 14px; font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--text-tertiary); height:44px; }
+  .timeline-header{ position:sticky; top:0; z-index:4; background:var(--surface); border-bottom:1px solid var(--border); height:44px; position:relative; }
+  .hour-tick{ position:absolute; top:0; bottom:0; width:60px; display:flex; align-items:center; padding-left:6px; font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:var(--text-tertiary); border-left:1px solid var(--border); }
+  .hour-tick.major{ border-left:1px solid var(--border-strong); color:var(--text-secondary); font-weight:600; }
+
+  .row-channel{ position:sticky; left:0; z-index:3; background:var(--surface); border-right:1px solid var(--border); border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; padding:0 14px; height:64px; }
+  .ch-logo{ width:32px;height:32px;border-radius:8px; flex:none; display:flex; align-items:center; justify-content:center; font-family:'Archivo', sans-serif; font-weight:800; font-size:11.5px; background:var(--surface-2); border:1px solid var(--border); color:var(--text-secondary); }
+  .ch-name-wrap{ min-width:0; }
+  .ch-name{ font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:flex; align-items:center; gap:6px; }
+  .ch-tag{ display:inline-flex; margin-top:3px; font-size:10px; font-weight:600; letter-spacing:.02em; padding:1px 6px; border-radius:5px; text-transform:uppercase; font-family:'IBM Plex Mono', monospace; }
+  .ch-tag.oerr{ background:var(--oerr-soft); color:var(--oerr); }
+  .ch-tag.privat{ background:var(--privat-soft); color:var(--privat); }
+
+  .src-dot{ width:7px;height:7px;border-radius:50%; flex:none; margin-left:2px; display:inline-block; cursor:help; }
+  .src-dot.inoffiziell{ background:var(--warn); }
+  .src-dot.gesperrt{ background:var(--text-tertiary); }
+  .fallback-flag{ font-size:9px; color:var(--warn); font-family:'IBM Plex Mono', monospace; }
+
+  .row-timeline{ position:relative; height:64px; border-bottom:1px solid var(--border); background-image: repeating-linear-gradient(to right, var(--border) 0, var(--border) 1px, transparent 1px, transparent 60px); }
+  .program{ position:absolute; top:6px; bottom:6px; background:var(--surface-2); border:1px solid var(--border); border-radius:8px; padding:6px 10px; overflow:hidden; text-decoration:none; color:var(--text); display:flex; flex-direction:column; justify-content:center; gap:2px; transition:border-color .12s ease, background .12s ease, transform .12s ease; }
+  .program:hover{ border-color:var(--border-strong); background:var(--surface); transform:translateY(-1px); }
+  .program:focus-visible{ outline:2px solid var(--accent); outline-offset:1px; }
+  .program-title{ font-size:12.5px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .program-time{ font-size:10.5px; font-family:'IBM Plex Mono', monospace; color:var(--text-tertiary); white-space:nowrap; overflow:hidden; }
+  .program.is-live{ background:var(--live-soft); border-color:var(--live); }
+  .program.is-live .program-title{ color:var(--live); }
+  .live-dot{ width:6px;height:6px;border-radius:50%; background:var(--live); display:inline-block; margin-right:5px; animation:pulse 1.6s ease-in-out infinite; flex:none; }
+
+  .now-col{ grid-column:2; grid-row:1/-1; position:relative; pointer-events:none; z-index:2; }
+  .now-line{ position:absolute; top:0; bottom:0; width:2px; background:var(--live); }
+  .now-line::before{ content:""; position:absolute; top:-1px; left:50%; transform:translateX(-50%); width:8px;height:8px;border-radius:50%; background:var(--live); }
+
+  footer{ font-size:11.5px; color:var(--text-tertiary); text-align:center; padding-top:2px; }
+  .load-error{ padding:24px; text-align:center; color:var(--live); font-size:13px; }
+
+  @media (max-width: 700px){
+    .guide-scroll::after{ content:"Für die volle Zeitleisten-Ansicht bitte querformatig / am Desktop öffnen — eine optimierte mobile Ansicht folgt."; display:block; font-size:11px; color:var(--text-tertiary); padding:10px 14px; border-top:1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-mark">SG</div>
+      <div>
+        <h1>Streamguide</h1>
+        <p class="tagline">Stream-exklusive Live-Kanäle · ÖRR &amp; Privatsender</p>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="filters" role="group" aria-label="Sender filtern">
+        <button class="filter-btn active" data-filter="all">Alle</button>
+        <button class="filter-btn" data-filter="oerr">ÖRR</button>
+        <button class="filter-btn" data-filter="privat">Privatsender</button>
+      </div>
+      <div class="meta"><span class="update-dot"></span><span id="updateText">wird geladen…</span></div>
+    </div>
+  </div>
+
+  <div class="notice">
+    Nur Inhalte, die es <strong>ausschließlich als Stream</strong> gibt — keine linearen TV-Simulcasts. Klick auf ein Programm öffnet den Anbieter in neuem Tab (teils hinter Login).
+  </div>
+  <div class="notice">
+    <span class="legend">
+      <strong style="color:var(--text)">Datenquelle:</strong>
+      <span class="legend-item"><span class="src-dot inoffiziell"></span>inoffiziell, aber erreichbar</span>
+      <span class="legend-item"><span class="src-dot gesperrt"></span>kein öffentlicher Zugang / manuell gepflegt</span>
+      <span class="legend-item"><span class="fallback-flag">FALLBACK</span> = Live-Abruf fehlgeschlagen, zeigt manuelle Daten</span>
+    </span>
+  </div>
+
+  <div class="guide-shell">
+    <div class="guide-scroll" id="guideScroll">
+      <div id="guideGridWrap"><div class="load-error">Lade Programmdaten…</div></div>
+    </div>
+  </div>
+
+  <footer id="footerNote">Lädt…</footer>
+</div>
+
+<script>
+(function(){
+  const PX_PER_MIN = 1;
+  let CHANNELS = [];
+  let META = {};
+
+  function fmt(min){
+    const h = Math.floor(min/60) % 24;
+    const m = min % 60;
+    return String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0');
+  }
+
+  function nowMinutes(){
+    const d = new Date();
+    return d.getHours()*60 + d.getMinutes();
+  }
+
+  async function loadData(){
+    try {
+      const res = await fetch('/schedule.json', { cache: 'no-store' });
+      if(!res.ok) throw new Error('HTTP ' + res.status);
+      const json = await res.json();
+      CHANNELS = json.channels || [];
+      META = { generatedAt: json.generatedAt };
+      buildGrid();
+      renderRows();
+      positionNowLine();
+      updateFooter();
+    } catch (err) {
+      document.getElementById('guideGridWrap').innerHTML =
+        '<div class="load-error">Konnte data/schedule.json nicht laden (' + err.message + ').<br>Wurde <code>node build.js</code> schon einmal ausgeführt?</div>';
+      document.getElementById('footerNote').textContent = 'Keine Daten geladen.';
+    }
+  }
+
+  function buildGrid(){
+    const wrap = document.getElementById('guideGridWrap');
+    wrap.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'guide-grid';
+    grid.id = 'guideGrid';
+
+    const corner = document.createElement('div');
+    corner.className = 'corner';
+    corner.textContent = 'Sender';
+    grid.appendChild(corner);
+
+    const timelineHeader = document.createElement('div');
+    timelineHeader.className = 'timeline-header';
+    timelineHeader.id = 'timelineHeader';
+    for(let h=0; h<24; h++){
+      const tick = document.createElement('div');
+      tick.className = 'hour-tick' + (h % 6 === 0 ? ' major' : '');
+      tick.style.left = (h*60*PX_PER_MIN) + 'px';
+      tick.textContent = String(h).padStart(2,'0') + ':00';
+      timelineHeader.appendChild(tick);
+    }
+    grid.appendChild(timelineHeader);
+
+    const nowCol = document.createElement('div');
+    nowCol.className = 'now-col';
+    nowCol.innerHTML = '<div class="now-line" id="nowLine"></div>';
+    grid.appendChild(nowCol);
+
+    wrap.appendChild(grid);
+  }
+
+  function renderRows(){
+    const guideGrid = document.getElementById('guideGrid');
+    guideGrid.querySelectorAll('.row-channel, .row-timeline').forEach(el => el.remove());
+    const nowMin = nowMinutes();
+    const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+
+    CHANNELS.forEach(ch => {
+      if(activeFilter !== 'all' && ch.group !== activeFilter) return;
+
+      const rc = document.createElement('div');
+      rc.className = 'row-channel';
+      rc.innerHTML = `
+        <div class="ch-logo">${(ch.name||'?').slice(0,2).toUpperCase()}</div>
+        <div class="ch-name-wrap">
+          <div class="ch-name">${ch.name}<span class="src-dot ${ch.sourceStatus}" title="${ch.sourceNote||''}"></span>${ch.usedFallback ? '<span class="fallback-flag">FALLBACK</span>' : ''}</div>
+          <span class="ch-tag ${ch.group}">${ch.group === 'oerr' ? 'ÖRR' : 'Privat'}</span>
+        </div>`;
+      guideGrid.insertBefore(rc, guideGrid.querySelector('.now-col'));
+
+      const rt = document.createElement('div');
+      rt.className = 'row-timeline';
+      (ch.schedule || []).forEach(prog => {
+        const isLive = nowMin >= prog.start && nowMin < prog.end;
+        const a = document.createElement('a');
+        a.className = 'program' + (isLive ? ' is-live' : '');
+        a.href = ch.url;
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.style.left = (prog.start*PX_PER_MIN) + 'px';
+        a.style.width = Math.max(0, (prog.end-prog.start)*PX_PER_MIN - 4) + 'px';
+        const timeLabel = fmt(prog.start) + '–' + fmt(prog.end);
+        a.innerHTML = `<span class="program-title">${isLive ? '<span class="live-dot"></span>' : ''}${prog.title}</span><span class="program-time">${timeLabel}</span>`;
+        a.title = ch.name + ' · ' + prog.title + ' (' + timeLabel + ') — öffnet ' + ch.url;
+        rt.appendChild(a);
+      });
+      guideGrid.insertBefore(rt, guideGrid.querySelector('.now-col'));
+    });
+  }
+
+  function positionNowLine(){
+    const nowLine = document.getElementById('nowLine');
+    if(nowLine) nowLine.style.left = (nowMinutes()*PX_PER_MIN) + 'px';
+  }
+
+  function scrollToNow(){
+    const guideScroll = document.getElementById('guideScroll');
+    const target = nowMinutes()*PX_PER_MIN - (guideScroll.clientWidth - 208)/2;
+    guideScroll.scrollLeft = Math.max(0, target);
+  }
+
+  function updateFooter(){
+    const el = document.getElementById('footerNote');
+    const liveCount = CHANNELS.filter(c => !c.usedFallback && c.dataSource === 'live').length;
+    const generated = META.generatedAt ? new Date(META.generatedAt).toLocaleString('de-DE') : '–';
+    el.textContent = `Stand: ${generated} · ${liveCount}/${CHANNELS.length} Sender live abgerufen, Rest manuell/Fallback. Aktualisierung per Cronjob alle 30 Min (node build.js).`;
+
+    const mins = META.generatedAt ? Math.round((Date.now() - new Date(META.generatedAt).getTime())/60000) : null;
+    document.getElementById('updateText').textContent = mins == null ? '–' : (mins <= 0 ? 'aktualisiert gerade eben' : `aktualisiert vor ${mins} Min`);
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRows();
+    });
+  });
+
+  loadData().then(scrollToNow);
+  setInterval(positionNowLine, 60000);
+  setInterval(loadData, 5*60000); // holt alle 5 Min die (alle 30 Min per Cron erzeugte) schedule.json neu
+})();
+</script>
+</body>
+</html>

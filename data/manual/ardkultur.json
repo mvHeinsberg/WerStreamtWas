@@ -1,0 +1,11 @@
+[
+  { "time": "00:00", "title": "Nachtkonzert" },
+  { "time": "03:00", "title": "Opern-Nacht" },
+  { "time": "06:00", "title": "Kultur am Morgen" },
+  { "time": "09:00", "title": "Doku: Kunst & Leben" },
+  { "time": "12:00", "title": "Konzert-Mitschnitt" },
+  { "time": "15:00", "title": "Literatur im Gespräch" },
+  { "time": "18:00", "title": "Bühne frei – Theaterabend" },
+  { "time": "20:15", "title": "Sinfoniekonzert live" },
+  { "time": "22:30", "title": "Jazz Session" }
+]

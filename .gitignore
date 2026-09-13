@@ -1,0 +1,7 @@
+node_modules/
+data/.sessions/
+data/debug/
+data/schedule.json
+logs/
+config/captured-endpoints/rtlplus.json
+config/captured-endpoints/joyn.json

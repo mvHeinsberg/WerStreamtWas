@@ -1,0 +1,16 @@
+{
+  "name": "streamguide-lokal",
+  "version": "1.0.0",
+  "description": "Lokaler EPG-Prototyp fuer stream-exklusive Live-Kanaele (OeRR & Privatsender).",
+  "private": true,
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "node build.js",
+    "start": "node server.js",
+    "login:rtlplus": "node scripts/login-and-capture.js rtlplus https://plus.rtl.de",
+    "login:joyn": "node scripts/login-and-capture.js joyn https://www.joyn.de"
+  },
+  "dependencies": {
+    "playwright": "^1.47.0"
+  }
+}
