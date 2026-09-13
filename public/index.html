@@ -174,7 +174,7 @@
 
   async function loadData(){
     try {
-      const res = await fetch('/schedule.json', { cache: 'no-store' });
+      const res = await fetch('schedule.json', { cache: 'no-store' });
       if(!res.ok) throw new Error('HTTP ' + res.status);
       const json = await res.json();
       CHANNELS = json.channels || [];
